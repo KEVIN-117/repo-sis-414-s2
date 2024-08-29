@@ -16,12 +16,12 @@ Este repositorio está diseñado para proporcionar recursos educativos/ejemplos 
 
 1. Clona el repositorio
 ```bash
-git clone https://github.com/usuario/repositorio.git
+git clone https://github.com/KEVIN-117/repo-sis-414-s2.git
 ```
 
 2. Navega al directorio del proyecto:
 ```bash
-cd repositorio
+cd repo-sis-414-s2
 ```
 
 3. Instala las dependencias
