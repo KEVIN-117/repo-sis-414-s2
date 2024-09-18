@@ -28,3 +28,6 @@ cd repo-sis-414-s2
 ```bash
 npm install
 ```
+
+# clase php CRUD
+[repo](https://github.com/KEVIN-117/clase-miercoles-sis-414.git)
