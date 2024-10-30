@@ -32,8 +32,8 @@ class CustomerController extends Controller
         ]);
 
         Customer::create($validator);
-        back()->with('success', 'Customer created successfully');
-        return redirect('/customer');
+        //back()->with('success', 'Customer created successfully');// http://127.0.0.1:8000/customer/create
+        return redirect('/customer');// http://127.0.0.1:8000/customer
     }
 
     /**
@@ -42,6 +42,10 @@ class CustomerController extends Controller
     public function show(string $id)
     {
         //
+
+        $customer = Customer::find($id);
+
+        return view('customer.show', compact('customer'));
     }
 
     /**
@@ -50,6 +54,10 @@ class CustomerController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $customer = Customer::find($id);
+
+        $customer->update($request->all());
+        redirect('/customer');
     }
 
     /**
@@ -58,11 +66,20 @@ class CustomerController extends Controller
     public function destroy(string $id)
     {
         //
+        $customer = Customer::find($id);
+        $customer->delete();
+        return redirect('/customer');
     }
 
     public function create()
     {
         return view('customer.create');
+    }
+
+    public function updateCustomer(string $id)
+    {
+        $customer = Customer::find($id);
+        return view('customer.update', compact('customer'));
     }
 }
 
