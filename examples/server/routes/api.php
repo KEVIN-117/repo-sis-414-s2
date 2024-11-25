@@ -14,6 +14,9 @@ Route::get('/user', function (Request $request) {
 
 
 Route::apiResource('posts', PostController::class);
+
+// http://127.0.0.1:8000/api/categories -> recupera todas las ctaegorias
+// http://127.0.0.1:8000/api/categories/$id -> recupera una categoria por id
 Route::apiResource('categories', CategoryController::class);
 Route::apiResource('like', LikeController::class);
 Route::apiResource('posts', PostController::class);
