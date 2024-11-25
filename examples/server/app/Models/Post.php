@@ -2,11 +2,21 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
     //
+    use HasFactory;
+    protected $fillable = [
+        'user_id',
+        'title',
+        'content',
+        'summary',
+        'published_at',
+        'category_id',
+    ];
 
     public function user()
     {
@@ -33,8 +43,8 @@ class Post extends Model
         return $this->hasMany(Like::class, 'post_id');
     }
 
-    public function views(){
+    public function views()
+    {
         return $this->hasMany(View::class, 'post_id');
     }
-
 }

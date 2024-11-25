@@ -1,4 +1,6 @@
 import { Main } from "@/components/shared/Main";
+
+import { GetCategories } from "@/modules/categories/components/GetCategories";
 import Categories, { CategoriesProps } from "@/components/ui/categories/Categories";
 import Testimonials from "@/components/ui/testimonials/Testimonials";
 
@@ -34,6 +36,8 @@ export default async function Home() {
   const { categories, status: categoriesResponseStatus } = data;
   return (
     <>
+      <Main />
+      <GetCategories />
       <div className="relative overflow-hidden">
         <div className="relative flex flex-col h-screen w-screen overflow-hidden bg-[#030014]" id="about-me">
           <video

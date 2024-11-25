@@ -1,49 +1,85 @@
-import { envs } from "@/config/get-envs";
+"use server";
+import { axioStore } from '@/store/axios-config';
+import { isAxiosError } from 'axios';
 
-interface IProps<T> {
-    url: string,
-    method: 'GET' | 'POST' | 'PUT' | 'DELETE',
-    body?: T,
+interface Props<T> {
+    url: string;
+    method: 'GET' | 'POST' | 'PUT' | 'DELETE';
+    datos?: T;
 }
-export const headers = {
+
+const headers = {
     'Content-Type': 'application/json',
-    Accept: 'application/json',
+    'Accept': 'application/json',
 }
-export async function fetcher<T, E, C>(props: IProps<T>): Promise<T> {
-    let data;
+
+export async function fetcher<T, M, R, E>({ method, url, datos }: Props<M>): Promise<T> {
+    let response;
     try {
-        const { NEXT_PUBLIC_API_BASE_URL } = envs;
-        const { method, url, body } = props;
-        const URL = `${NEXT_PUBLIC_API_BASE_URL}${url}`;
         let res;
-        if (method === 'POST' || method === 'PUT') {
-            res = await fetch(URL, {
-                body: JSON.stringify(body),
-                method: method,
-                headers: headers
-            })
-        } else {
-            res = await fetch(URL, {
-                headers: headers,
-            })
+        switch (method) {
+            case 'POST': {
+                res = await axioStore.post(url, datos, {
+                    headers
+                });
+                break;
+            };
+            case 'PUT': {
+                res = await axioStore.put(url, datos, {
+                    headers
+                });
+                break;
+            };
+            case 'DELETE': {
+                res = await axioStore.delete(url, {
+                    headers
+                });
+                break;
+            };
+            default: {
+                res = await axioStore.get(url, {
+                    headers
+                });
+            }
         }
-        const dataRes = await res.json() as C;
+        //console.log(res);
 
-        if (res.ok) {
-            data = {
-                status: res.status,
-                data: dataRes,
-                error: {} as E
-            } as T;
+        const r = res.data as R
+        console.log(r);
+
+        response = {
+            data: r,
+            status: res.status,
+            errors: {
+                errors: [],
+                status: 0,
+                message: ''
+            } as E
         }
-
 
     } catch (error) {
-        data = {
-            status: 500,
-            data: [],
-            error: error as E
-        } as T;
+        if (isAxiosError(error)) {
+            response = {
+                data: null,
+                status: error.response?.status,
+                errors: {
+                    errors: error.response?.data.errors || [],
+                    status: error.response?.status || 0,
+                    message: error.response?.data.message || ''
+                } as E
+            }
+        } else {
+            response = {
+                data: null,
+                status: 500,
+                errors: {
+                    errors: [],
+                    status: 0,
+                    message: ''
+                } as E
+            };
+        }
     }
-    return data as T;
+
+    return response as T;
 }
