@@ -10,8 +10,6 @@ export async function GetCategories() {
     }
     const { categories } = data;
     return (
-        <div>
-            <Categories categories={categories} status={200} />
-        </div>
+        <Categories categories={categories} status={200} />
     );
 }

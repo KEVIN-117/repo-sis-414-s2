@@ -22,7 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.className} antialiased font-[family-name:var(--font-geist-sans)]`}
+        className={`${inter.className} dark antialiased font-[family-name:var(--font-geist-sans)]`}
       >
         <Header />
         <main className="overflow-hidden">

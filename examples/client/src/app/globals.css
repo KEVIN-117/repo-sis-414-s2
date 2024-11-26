@@ -35,6 +35,77 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+
+  .custom-bg {
+    @apply bg-gradient-to-tl from-[#3e2781] to-stone-950/40 border border-[#5d41a7];
+  }
+
+  /* code {
+    @apply bg-gradient-to-tr from-[#3e2781] to-stone-950/40 border border-[#5d41a7] rounded-sm px-1;
+  } */
+
+  pre {
+    @apply bg-gradient-to-tr from-[#3e2781] to-stone-950/40 border border-[#5d41a7] rounded-sm p-2 text-justify;
+  }
+
+  br {
+    content: "";
+    display: block;
+    margin: 1em 0;
+  }
+  hr {
+    border: 0;
+    border-top: 1px solid #333;
+    margin: 1em 0;
+  }
+
+  .md > * + * {
+    margin-top: 1em;
+  }
+
+  .md h1{
+    @apply text-3xl font-bold ;
+  }
+
+  .md h2{
+    @apply text-2xl font-bold;
+  }
+
+  .md h3{
+    @apply text-xl font-bold;
+  }
+
+  .md h4{
+    @apply text-lg font-bold;
+  }
+
+  .md h5{
+    @apply text-base font-bold;
+  }
+
+  .md h6{
+    @apply text-sm font-bold;
+  }
+
+  .md p {
+    @apply text-base;
+  }
+
+  .md ul {
+    @apply list-disc pl-4;
+  }
+
+  .md mark {
+    @apply bg-yellow-200;
+  }
+
+  .md strong{
+    @apply font-bold 
+  }
+
+  .language-html{
+    @apply text-html 
+  }
 }
 
 .Welcome-text {
@@ -61,10 +132,15 @@ body {
   transition: 0.45s cubic-bezier(0.6, 0.6, 0, 1) box-shadow;
 }
 
-
-.set-glow-gb{
-  background-image: url('/images/glow-bottom.svg');
+.set-glow-gb {
+  background-image: url("/images/glow-bottom.svg");
   background-repeat: no-repeat;
   background-position: center bottom;
   object-fit: fill;
+}
+
+/* code editor */
+
+mark {
+  background-color: #9fef00;
 }

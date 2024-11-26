@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -9,6 +10,7 @@ class Post extends Model
 {
     //
     use HasFactory;
+    use HasUuids;
     protected $fillable = [
         'user_id',
         'title',
@@ -16,6 +18,7 @@ class Post extends Model
         'summary',
         'published_at',
         'category_id',
+        'slug',
     ];
 
     public function user()

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\post;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\post\PostCollection;
+use App\Http\Resources\post\PostResource;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -24,10 +26,7 @@ class PostController extends Controller
             ]);
         }
 
-        return response()->json([
-            'posts' => $posts,
-            'status' => 200,
-        ]);
+        return new PostCollection($posts);
     }
 
     /**
@@ -36,7 +35,7 @@ class PostController extends Controller
     public function store(Request $request)
     {
         //
-        $request["slug"] = $this->createSlug('CI/CD DevOps');
+        $request["slug"] = $this->createSlug($request->title);
 
         $validate = Validator::make($request->all(), [
             'user_id' => 'required|string',
@@ -109,11 +108,22 @@ class PostController extends Controller
             ]);
         }
 
-        return response()->json([
-            'post' => $post,
-            'status' => 200,
-            'message' => 'Post found'
-        ]);
+        return new PostResource($post);
+    }
+
+    public function showBySlug(string $slug)
+    {
+        //
+        $post = Post::where('slug', $slug)->first();
+
+        if (!$post) {
+            return response()->json([
+                'message' => 'Post not created',
+                'status' => 404,
+            ]);
+        }
+
+        return new PostResource($post);
     }
 
     /**

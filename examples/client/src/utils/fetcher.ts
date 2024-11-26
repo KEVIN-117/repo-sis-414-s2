@@ -45,16 +45,11 @@ export async function fetcher<T, M, R, E>({ method, url, datos }: Props<M>): Pro
         //console.log(res);
 
         const r = res.data as R
-        console.log(r);
 
         response = {
             data: r,
             status: res.status,
-            errors: {
-                errors: [],
-                status: 0,
-                message: ''
-            } as E
+            errors: null
         }
 
     } catch (error) {

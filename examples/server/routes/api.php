@@ -23,3 +23,4 @@ Route::apiResource('posts', PostController::class);
 Route::apiResource('posts-tag', PostTagController::class);
 Route::apiResource('view', ViewController::class);
 Route::apiResource('posts', PostController::class);
+Route::get('posts/slug/{slug}', [PostController::class, 'showBySlug']);

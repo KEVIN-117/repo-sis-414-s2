@@ -9,7 +9,7 @@ export async function getCategories() {
         const { data, errors } = await fetcher<BaseResponse, Category, CategoriesResponse, CategoryErrors>({
             url: '/categories',
             method: 'GET'
-        })
+        })        
 
         if (errors) {
             return {
