@@ -1,12 +1,29 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+// import { Inter } from "next/font/google";
+import localFont from 'next/font/local'
 import "./globals.css";
 import { Footer } from "@/components/shared/Footer";
 import { Header } from "@/components/shared/Header";
+import { Providers } from "@/modules/shared";
 
-const inter = Inter({
-  subsets: ['latin'],
-  display: 'swap',
+// const inter = Inter({
+//   subsets: ['latin'],
+//   display: 'swap',
+// })
+
+const local = localFont({
+  src: [
+    {
+      path: './fonts/Dune_Rise.ttf',
+      weight: '400 700',
+      style: 'normal',
+    },
+    {
+      path: './fonts/Dune_Rise.otf',
+      weight: '400 700',
+      style: 'normal',
+    }
+  ]
 })
 
 export const metadata: Metadata = {
@@ -22,13 +39,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.className} dark antialiased font-[family-name:var(--font-geist-sans)]`}
+        className={`${local.className} dark antialiased`}
       >
-        <Header />
-        <main className="overflow-hidden">
-          {children}
-        </main>
-        <Footer />
+        <Providers>
+          <Header />
+          <main className="overflow-hidden">
+            {children}
+          </main>
+          <Footer />
+        </Providers>
       </body>
     </html>
   );

@@ -5,7 +5,6 @@ import { GetCategories } from "@/modules/categories/components/GetCategories";
 import Testimonials from "@/components/ui/testimonials/Testimonials";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
-import { PostView } from "@/modules/post/components/PostView";
 
 
 export default async function Home() {
@@ -27,7 +26,7 @@ export default async function Home() {
       </div>
       {/* <Main /> */}
 
-      <div className="p-4 text-white">
+      <div className="p-4 text-white set-font">
         <div className="mx-auto container">
           <div className="grid gap-8 lg:grid-cols-3 place-content-baseline">
             {/* Main Content */}
@@ -71,7 +70,6 @@ export default async function Home() {
       <div className="mt-10">
         {/* <Categories status={categoriesResponseStatus} categories={categories} /> */}
         < Testimonials />
-        <PostView />
       </div>
     </>
   );
